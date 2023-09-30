@@ -4,10 +4,12 @@ import styled from "styled-components";
 import { Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MainHeader = () => {
   const navigate = useNavigate();
-
+  const { me } = useSelector((state) => state.user);
+  console.log("me", me);
   return (
     <Header
       style={{
@@ -18,10 +20,14 @@ const MainHeader = () => {
       }}
     >
       <LogoImg src="/image/malohajalogo.png" onClick={() => navigate("/")} />
-      <Button onClick={() => navigate("/login")}>
-        로그인
+      {!me ? (
+        <Button onClick={() => navigate("/login")}>
+          로그인
+          <UserOutlined />
+        </Button>
+      ) : (
         <UserOutlined />
-      </Button>
+      )}
     </Header>
   );
 };

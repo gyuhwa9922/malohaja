@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { Button, Col, Form, Input, Row, Select, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { CHECK_NICKNAME_REQUEST, SIGN_UP_REQUEST } from "../reducers/user";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 // const contentStyle = {
 //   textAlign: "center",
 //   minHeight: 120,
@@ -11,8 +12,9 @@ import { useNavigate } from "react-router-dom";
 // };
 
 const Signup = () => {
-  const { accesstoken } = useSelector((state) => state.user);
-  const [nickname, setninkname] = useState("");
+  const { accesstoken, isVailedNickName } = useSelector((state) => state.user);
+  const [nickname, setninkname] = useState(null);
+  const [isVailed, setisVailed] = useState();
   const onChangeNickname = useCallback((e) => {
     setninkname(e.target.value);
   }, []);
@@ -30,19 +32,51 @@ const Signup = () => {
       type: CHECK_NICKNAME_REQUEST,
       data: nickname,
     });
+    setisVailed(isVailedNickName);
   };
+  console.log("!?", isVailed);
+
+  useEffect(() => {
+    console.log("!!", nickname, isVailedNickName);
+    if (!isVailedNickName) {
+      console.log("flag1", isVailedNickName);
+      return Swal.fire({
+        icon: "success",
+        text: "사용 가능한 닉네임 입니다!",
+      });
+    }
+    if (isVailedNickName === true && nickname != null) {
+      console.log("flag2", isVailedNickName);
+      return Swal.fire({
+        icon: "error",
+        text: "중복된 닉네임 입니다!",
+      });
+    }
+  }, [isVailed]);
+
   const onFinish = (values) => {
+    console.log("전채 결과값 ", values);
+    console.log("전채 결과값 ", isVailed);
     if (!accesstoken) {
       return nav("/");
     }
-    console.log("전채 결과값 ", values);
-    return dispatch({
-      type: SIGN_UP_REQUEST,
-      data: {
-        header: `Bearer ${accesstoken}`,
-        values: values,
-      },
-    });
+    if (!isVailed === false) {
+      return dispatch(
+        {
+          type: SIGN_UP_REQUEST,
+          data: {
+            headers: { Authorization: `Bearer ${accesstoken}` },
+            values: values,
+          },
+        },
+        nav("/")
+      );
+    } else {
+      return Swal.fire({
+        icon: "error",
+        text: "닉네임 체크를 해주세요!",
+      });
+    }
   };
 
   return (
@@ -69,8 +103,16 @@ const Signup = () => {
             ]}
           >
             <Space direction="horizontal">
-              <Input value={nickname} onChange={onChangeNickname} />
-              <Button onClick={nicknameCheck} required>
+              <Input
+                value={nickname}
+                onChange={onChangeNickname}
+                disabled={!isVailedNickName}
+              />
+              <Button
+                onClick={nicknameCheck}
+                required
+                disabled={isVailedNickName && nickname != null ? false : true}
+              >
                 닉네임 체크
               </Button>
             </Space>

@@ -27,7 +27,7 @@ const Auth = () => {
     nav("/signup");
   }, []);
 
-  return <div>good</div>;
+  return <div>loading...</div>;
 };
 
 export default Auth;

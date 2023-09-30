@@ -14,7 +14,7 @@ export const initialState = {
   checknickDone: false,
   checknickError: null,
   accesstoken: null,
-  NicknameOverload: false,
+  isVailedNickName: true,
   me: null,
   userInfo: null,
 };
@@ -61,6 +61,7 @@ const reducer = (state = initialState, action) => {
         draft.signupError = null;
         break;
       case SIGN_UP_SUCCESS:
+        draft.me = action.data;
         draft.signupLoading = false;
         draft.signupDone = true;
         break;
@@ -74,6 +75,7 @@ const reducer = (state = initialState, action) => {
         draft.checknickError = null;
         break;
       case CHECK_NICKNAME_SUCCESS:
+        draft.isVailedNickName = false;
         draft.checknickLoading = false;
         draft.checknickDone = true;
         break;
