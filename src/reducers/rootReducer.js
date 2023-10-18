@@ -1,10 +1,9 @@
 import { combineReducers } from "redux";
+import user from "./user";
 
-const rootReducer = (state, action) => {
-  const combineReducer = combineReducers({
-    //reducer를 묶는 rootreducer
-  });
-  return combineReducer(state, action);
-};
+const rootReducer = combineReducers({
+  //combineReducers 를 사용해 reducer를 묶는 rootreducer
+  user,
+});
 
 export default rootReducer;

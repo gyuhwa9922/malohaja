@@ -1,10 +1,13 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "../pages/Main";
 
-const Router = () => {
+function Router() {
   return (
-    <Routes>
-      {/* <Route path="/" element={</>}/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        {/* <Route path="/" element={</>}/>
       <Route path="/" element={</>}/>
       <Route path="/" element={</>}/>
       <Route path="/" element={</>}/>
@@ -13,8 +16,9 @@ const Router = () => {
       <Route path="/" element={</>}/>
       <Route path="/" element={</>}/>
       <Route path="/" element={</>}/> */}
-    </Routes>
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
 export default Router;
