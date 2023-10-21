@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import "../../src/css/font.css";
+import "../../css/font.css";
 import { Button, Layout } from "antd";
-import LoginHeader from "../components/header/LoginHeader";
+import LoginHeader from "../../components/header/LoginHeader";
 import { Content } from "antd/es/layout/layout";
-import { GITHUB_AUTH_URL, KAKAO_AUTH_URL } from "../shared/OAuth";
+import { GITHUB_AUTH_URL, KAKAO_AUTH_URL } from "../../shared/OAuth";
 
 const contentStyle = {
   textAlign: "center",
