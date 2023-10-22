@@ -16,12 +16,6 @@ const Auth = () => {
   const { provider } = useParams();
   console.log(code, "code");
   console.log("very good", provider);
-  // const sss = async () => {
-  //   const ww = await axios.get(
-  //     `http://172.20.10.3:8080/api/v1/auth/${provider}?code=${code}`
-  //   );
-  //   console.log("Www", ww);
-  // };
 
   useEffect(() => {
     // sss();
