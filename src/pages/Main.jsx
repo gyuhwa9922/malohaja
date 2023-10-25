@@ -7,10 +7,8 @@ const Main = () => {
   return (
     <Layout>
       <MainHeader />
+      <DetailSearchBar />
       <Row gutter={8}>
-        <Col xs={24} md={6}>
-          <DetailSearchBar />
-        </Col>
         <Col xs={24} md={6}>
           {/* <DetailSearchBar /> */}
         </Col>
