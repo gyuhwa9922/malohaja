@@ -11,11 +11,12 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
 } from "../reducers/user";
+
 //로그인
-// function SignUpAPI(data) {
-//   console.log(data);
-//   return axios.post(`http://172.20.10.3:8080/api/v1/signup`, data);
-// }
+function SignUpAPI(data) {
+  console.log(data);
+  return axios.post(`http://172.20.10.3:8080/api/v1/signup`, data);
+}
 
 function* SignUp(action) {
   try {
