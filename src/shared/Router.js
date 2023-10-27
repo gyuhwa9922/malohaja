@@ -4,6 +4,7 @@ import Main from "../pages/Main";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup";
 import Auth from "../pages/Login/Auth";
+import Write from "../pages/Write";
 
 function Router() {
   return (
@@ -13,8 +14,8 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/auth/login/:provider" element={<Auth />} />
+        <Route path="/write" element={<Write />} />
         {/* // <Route path="/" element={</>}/>
-      // <Route path="/" element={</>}/>
       // <Route path="/" element={</>}/>
       // <Route path="/" element={</>}/>
       // <Route path="/" element={</>}/>

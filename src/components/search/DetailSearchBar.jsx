@@ -1,12 +1,17 @@
 import React from "react";
 // import { Content } from "antd/es/layout/layout";
 import { Button, Col, Form, Input, Row, Select } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { KEY_WORD_SEARCH_REQUEST } from "../../reducers/post";
+import { EditOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const DetailSearchBar = () => {
   const { form } = Form.useForm();
+  const { me } = useSelector((state) => state.user);
+  const { skill } = useSelector((state) => state.post);
   const { dispatch } = useDispatch();
+  const nav = useNavigate();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
     dispatch({
@@ -17,11 +22,14 @@ const DetailSearchBar = () => {
   return (
     <Form
       form={form}
-      name="advanced_search"
-      style={{ padding: "24px", backgroundColor: "white" }}
+      name="detailSearchBar"
+      style={{
+        padding: "24px",
+        backgroundColor: "white",
+      }}
       onFinish={onFinish}
     >
-      <Row gutter={24} justify={"center"}>
+      <Row gutter={3} justify={"end"}>
         <Col xs={6}>
           <Form.Item name={"search_keyword"}>
             <Input placeholder="검색어" />
@@ -36,11 +44,7 @@ const DetailSearchBar = () => {
               },
             ]}
           >
-            <Select mode="multiple" placeholder="언어">
-              <Select.Option value="java">java</Select.Option>
-              <Select.Option value="js">js</Select.Option>
-              <Select.Option value="c++">c++</Select.Option>
-            </Select>
+            <Select mode="multiple" options={skill} placeholder="언어" />
           </Form.Item>
         </Col>
         <Col xs={4}>
@@ -60,11 +64,15 @@ const DetailSearchBar = () => {
             </Select>
           </Form.Item>
         </Col>
-        <Col xs={4}>
+        <Col xs={2}>
           <Button htmlType="submit">검색</Button>
         </Col>
-        <Col xs={4}>
-          <Button>글작성</Button>
+        <Col xs={6}>
+          {!me ? (
+            <Button icon={<EditOutlined />} onClick={() => nav("/write")}>
+              글작성
+            </Button>
+          ) : null}
         </Col>
       </Row>
     </Form>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "antd/es/layout/layout";
 import styled from "styled-components";
-import { Button } from "antd";
+import { Avatar, Button, Col, Row } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -13,27 +13,43 @@ const MainHeader = () => {
   return (
     <Header
       style={{
-        display: "flex",
-        alignItems: "center",
+        // display: "flex",
         backgroundColor: "white",
-        justifyContent: "space-between",
       }}
     >
-      <LogoImg src="/image/malohajalogo.png" onClick={() => navigate("/")} />
-      {!me ? (
-        <Button onClick={() => navigate("/login")}>
-          로그인
-          <UserOutlined />
-        </Button>
-      ) : (
-        <UserOutlined />
-      )}
+      <Row gutter={8} justify={"space-between"}>
+        <Col xs={2}>
+          <Avatar
+            src="/image/malohajalogo.png"
+            onClick={() => navigate("/")}
+            size={64}
+            shape="square"
+            style={{ cursor: "pointer" }}
+          >
+            {/* <LogoImg
+              src="/image/malohajalogo.png"
+              onClick={() => navigate("/")}
+            /> */}
+          </Avatar>
+        </Col>
+        <Col xs={2}>
+          {!me ? (
+            <Button onClick={() => navigate("/login")}>
+              로그인
+              <UserOutlined />
+            </Button>
+          ) : (
+            <UserOutlined />
+          )}
+        </Col>
+      </Row>
     </Header>
   );
 };
 
 const LogoImg = styled.img`
-  width: 10%;
+  width: 50%;
+  object-fit: cover;
   cursor: pointer;
 `;
 
