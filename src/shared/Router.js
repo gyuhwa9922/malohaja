@@ -15,11 +15,13 @@ function Router() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/auth/login/:provider" element={<Auth />} />
         <Route path="/write" element={<Write />} />
-        {/* // <Route path="/" element={</>}/>
-      // <Route path="/" element={</>}/>
-      // <Route path="/" element={</>}/>
-      // <Route path="/" element={</>}/>
-      // <Route path="/" element={</>}/>  */}
+
+        {/* <Route path="/mypage" element={</>}>
+       <Route path="/mylike" element={</>}/>
+       <Route path="/mybookmark" element={</>}/>
+       </Route>
+       <Route path="/" element={</>}/>
+       <Route path="/" element={</>}/>  */}
       </Routes>
     </BrowserRouter>
   );

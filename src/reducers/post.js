@@ -26,26 +26,38 @@ export const initialState = {
   keywordSearchLoading: false,
   keywordSearchDone: false,
   keywordSearchError: null,
-  loadPostLoading: false,
-  loadPostDone: false,
-  loadPostError: null,
-  WritePostLoading: false,
-  WritePostDone: false,
-  WritePostError: null,
-  post: [],
+  loadQuestionLoading: false,
+  loadQuestionDone: false,
+  loadQuestionError: null,
+  loadAnswerLoading: false,
+  loadAnswerDone: false,
+  loadAnswerError: null,
+  WriteQuestionLoading: false,
+  WriteQuestionDone: false,
+  WriteQuestionError: null,
+  questions: [],
+  answers: [],
 };
 
-export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
-export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
-export const LOAD_POST_FAILURE = "LOAD_POST_FAILURE";
+export const LOAD_QUESTION_REQUEST = "LOAD_QUESTION_REQUEST";
+export const LOAD_QUESTION_SUCCESS = "LOAD_QUESTION_SUCCESS";
+export const LOAD_QUESTION_FAILURE = "LOAD_QUESTION_FAILURE";
+
+export const LOAD_ANSWER_REQUEST = "LOAD_ANSWER_REQUEST";
+export const LOAD_ANSWER_SUCCESS = "LOAD_ANSWER_SUCCESS";
+export const LOAD_ANSWER_FAILURE = "LOAD_ANSWER_FAILURE";
 
 export const KEY_WORD_SEARCH_REQUEST = "KEY_WORD_SEARCH_REQUEST";
 export const KEY_WORD_SEARCH_SUCCESS = "KEY_WORD_SEARCH_SUCCESS";
 export const KEY_WORD_SEARCH_FAILURE = "KEY_WORD_SEARCH_FAILURE";
 
-export const WRITE_POST_REQUEST = "WRITE_POST_REQUEST";
-export const WRITE_POST_SUCCESS = "WRITE_POST_SUCCESS";
-export const WRITE_POST_FAILURE = "WRITE_POST_FAILURE";
+export const WRITE_QUESTION_REQUEST = "WRITE_QUESTION_REQUEST";
+export const WRITE_QUESTION_SUCCESS = "WRITE_QUESTION_SUCCESS";
+export const WRITE_QUESTION_FAILURE = "WRITE_QUESTION_FAILURE";
+
+export const WRITE_ANSWER_REQUEST = "WRITE_ANSWER_REQUEST";
+export const WRITE_ANSWER_SUCCESS = "WRITE_ANSWER_SUCCESS";
+export const WRITE_ANSWER_FAILURE = "WRITE_ANSWER_FAILURE";
 
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
@@ -63,31 +75,46 @@ const reducer = (state = initialState, action) => {
         draft.keywordSearchLoading = false;
         draft.keywordSearchError = action.error;
         break;
-      case LOAD_POST_REQUEST:
+      case LOAD_QUESTION_REQUEST:
+        draft.loadQuestionLoading = true;
+        draft.loadQuestionDone = false;
+        draft.loadQuestionError = null;
+        break;
+      case LOAD_QUESTION_SUCCESS:
+        draft.questions = action.data;
+        draft.loadQuestionLoading = false;
+        draft.loadQuestionDone = true;
+        break;
+      case LOAD_QUESTION_FAILURE:
+        draft.loadQuestionLoading = false;
+        draft.loadQuestionError = action.error;
+        break;
+      case LOAD_ANSWER_REQUEST:
+        draft.loadAnswerLoading = true;
+        draft.loadQuestionDone = false;
+        draft.loadQuestionError = null;
+        break;
+      case LOAD_ANSWER_SUCCESS:
+        draft.answers = action.data;
+        draft.loadAnswerLoading = false;
+        draft.loadQuestionDone = true;
+        break;
+      case LOAD_ANSWER_FAILURE:
+        draft.loadAnswerLoading = false;
+        draft.loadQuestionError = action.error;
+        break;
+      case WRITE_QUESTION_REQUEST:
         draft.loadPostLoading = true;
         draft.loadPostDone = false;
         draft.loadPostError = null;
         break;
-      case LOAD_POST_SUCCESS:
-        draft.loadPostLoading = false;
-        draft.loadPostDone = true;
+      case WRITE_QUESTION_SUCCESS:
+        draft.loadQuestionLoading = false;
+        draft.loadQuestionDone = true;
         break;
-      case LOAD_POST_FAILURE:
-        draft.loadPostLoading = false;
-        draft.loadPostError = action.error;
-        break;
-      case WRITE_POST_REQUEST:
-        draft.loadPostLoading = true;
-        draft.loadPostDone = false;
-        draft.loadPostError = null;
-        break;
-      case WRITE_POST_SUCCESS:
-        draft.loadPostLoading = false;
-        draft.loadPostDone = true;
-        break;
-      case WRITE_POST_FAILURE:
-        draft.loadPostLoading = false;
-        draft.loadPostError = action.error;
+      case WRITE_QUESTION_FAILURE:
+        draft.loadQuestionLoading = false;
+        draft.loadQuestionError = action.error;
         break;
       default:
         break;

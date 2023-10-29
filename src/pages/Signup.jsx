@@ -53,7 +53,7 @@ const Signup = () => {
       });
     }
   }, [isVailed]);
-
+  console.log(accesstoken);
   const onFinish = (values) => {
     console.log("전채 결과값 ", values);
     console.log("전채 결과값 ", isVailed);
@@ -64,9 +64,10 @@ const Signup = () => {
       return dispatch(
         {
           type: SIGN_UP_REQUEST,
+          // headers: { Authorization: `Bearer ${accesstoken}` },
           data: {
-            headers: { Authorization: `Bearer ${accesstoken}` },
             values: values,
+            headers: `Bearer ${accesstoken}`,
           },
         },
         nav("/")
@@ -117,7 +118,7 @@ const Signup = () => {
               </Button>
             </Space>
           </Form.Item>
-          <Form.Item name="intro" label="자기소개">
+          <Form.Item name="introduction" label="자기소개">
             <Input.TextArea />
           </Form.Item>
           <Form.Item
@@ -132,7 +133,7 @@ const Signup = () => {
             ]}
           >
             <Select placeholder="당신의 경력을 골라주세요!">
-              <Option value="beginer">BEGINNER</Option>
+              <Option value="beginner">BEGINNER</Option>
               <Option value="junior">JUNIOR</Option>
               <Option value="middle">MIDDLE</Option>
               <Option value="senior">SENIOR</Option>

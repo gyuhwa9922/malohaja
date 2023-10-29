@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
         draft.providerError = null;
         break;
       case REQUEST_PROVIDER_SUCCESS:
-        draft.accesstoken = action.data;
+        draft.accesstoken = action.data.accessToken;
         draft.providerLoading = false;
         draft.providerDone = true;
         break;
@@ -75,7 +75,7 @@ const reducer = (state = initialState, action) => {
         draft.checknickError = null;
         break;
       case CHECK_NICKNAME_SUCCESS:
-        draft.isVailedNickName = false;
+        draft.isVailedNickName = action.data.isDuplicated;
         draft.checknickLoading = false;
         draft.checknickDone = true;
         break;
