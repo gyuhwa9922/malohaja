@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { KEY_WORD_SEARCH_REQUEST } from "../../reducers/post";
 import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { skillInfo } from "../../constants/skillinfo";
 
-const DetailSearchBar = () => {
+const DetailSearchBar = ({ me }) => {
+  const dispatch = useDispatch();
   const { form } = Form.useForm();
-  const { me } = useSelector((state) => state.user);
-  const { skill } = useSelector((state) => state.post);
-  const { dispatch } = useDispatch();
+
   const nav = useNavigate();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
@@ -19,6 +19,7 @@ const DetailSearchBar = () => {
       data: values,
     });
   };
+  useEffect(() => {});
   return (
     <Form
       form={form}
@@ -44,7 +45,7 @@ const DetailSearchBar = () => {
               },
             ]}
           >
-            <Select mode="multiple" options={skill} placeholder="언어" />
+            <Select mode="multiple" options={skillInfo} placeholder="언어" />
           </Form.Item>
         </Col>
         <Col xs={4}>
@@ -72,7 +73,9 @@ const DetailSearchBar = () => {
             <Button icon={<EditOutlined />} onClick={() => nav("/write")}>
               글작성
             </Button>
-          ) : null}
+          ) : (
+            <></>
+          )}
         </Col>
       </Row>
     </Form>

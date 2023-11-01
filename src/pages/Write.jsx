@@ -4,14 +4,14 @@ import MainHeader from "../components/header/MainHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UploadOutlined } from "@ant-design/icons";
+import { skillInfo } from "../constants/skillinfo";
+
 import Swal from "sweetalert2";
 import { WRITE_POST_REQUEST } from "../reducers/post";
 
 const Write = () => {
-  const dispatch = useDispatch();
   const nav = useNavigate();
-  const { me } = useSelector((state) => state.user);
-  const { skill } = useSelector((state) => state.post);
+  const dispatch = useDispatch();
   const [ImageList, setImageList] = useState([]);
   const [previewImg, setPreviewImg] = useState([]);
   const imageInput = useRef();
@@ -42,10 +42,11 @@ const Write = () => {
   };
   console.log(ImageList, previewImg);
 
-  // if (!me) {
-  //   nav("/");
-  // }
-
+  useEffect(() => {
+    // if (!me) {
+    //   nav("/");
+    // }
+  });
   const onFinish = (values) => {
     const form = new FormData();
     ImageList.forEach((p) => {
@@ -53,14 +54,14 @@ const Write = () => {
     });
     form.append("value", values);
     // form.append("value" , values  );
-    if (me) {
-      // dispatch({
-      //   type : WRITE_POST_REQUEST
-      //   data : values
-      // })
-    } else {
-      // nav("/");
-    }
+    // if (me) {
+    //   // dispatch({
+    //   //   type : WRITE_POST_REQUEST
+    //   //   data : values
+    //   // })
+    // } else {
+    //   // nav("/");
+    // }
     console.log("Received values of form: ", form);
   };
 
@@ -86,7 +87,7 @@ const Write = () => {
                 },
               ]}
             >
-              <Select mode="multiple" options={skill} placeholder="언어" />
+              <Select mode="multiple" options={skillInfo} placeholder="언어" />
             </Form.Item>
             <Form.Item name={"content"} label="질문작성">
               <Input.TextArea />

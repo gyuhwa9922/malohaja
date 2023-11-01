@@ -1,30 +1,29 @@
 import React, { useEffect } from "react";
 import MainHeader from "../components/header/MainHeader";
-import { Col, Layout, Row } from "antd";
+import { Col, Layout, Row, Avatar, List, Space, Card } from "antd";
 import DetailSearchBar from "../components/search/DetailSearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import Question from "../components/question/Question";
 import { LOAD_QUESTION_REQUEST } from "../reducers/post";
 
 const Main = () => {
-  const dispatch = useDispatch();
-  const { questions } = useSelector((state) => state.post);
+  // const dispatch = useDispatch();
+  const { me } = useSelector((state) => state.user);
+
   // useEffect(() => {
-  //   dispatch({
-  //     type: LOAD_QUESTION_REQUEST,
-  //   });
+  //   // dispatch({
+  //   //   type: LOAD_QUESTION_REQUEST,
+  //   // });
   // });
   return (
     <Layout>
-      <MainHeader />
-      <DetailSearchBar />
-      <Row gutter={8}>
-        <Col xs={6} md={6}>
-          {/* {questions.map((i) => (
+      <MainHeader me={me} />
+      <DetailSearchBar me={me} />
+      <Question />
+
+      {/* {questions.map((i) => (
             <Question key={i.id} quetion={i} />
           ))} */}
-        </Col>
-      </Row>
     </Layout>
   );
 };

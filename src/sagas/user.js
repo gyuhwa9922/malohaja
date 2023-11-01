@@ -13,7 +13,7 @@ import {
 } from "../reducers/user";
 
 //로그인
-function SignUpAPI(data) {
+function signUpAPI(data) {
   return axios.post(`/api/v1/member/signup`, data.values, {
     headers: {
       Authorization: `${data.headers}`,
@@ -21,11 +21,11 @@ function SignUpAPI(data) {
   });
 }
 
-function* SignUp(action) {
+function* signUp(action) {
   console.log(action.data);
   try {
     console.log("action.data", action.data);
-    const result = yield call(SignUpAPI, action.data);
+    const result = yield call(signUpAPI, action.data);
     yield put({
       type: SIGN_UP_SUCCESS,
       data: result.data,
@@ -39,15 +39,15 @@ function* SignUp(action) {
   }
 }
 //provider, code를 보내 token 받아오는 요청
-function ProviderAPI(data) {
+function providerAPI(data) {
   console.log(data.provider, data.code);
   return axios.get(`/api/v1/auth/${data.provider}?code=${data.code}`, data);
 }
 
-function* Provider(action) {
+function* provider(action) {
   try {
     console.log("action.data", action.data);
-    const result = yield call(ProviderAPI, action.data);
+    const result = yield call(providerAPI, action.data);
     yield put({
       type: REQUEST_PROVIDER_SUCCESS,
       // data: "dummytoken",
@@ -61,15 +61,15 @@ function* Provider(action) {
   }
 }
 //signup 때 중복닉네임인지 확인하는 api
-function CheckNicknameAPI(data) {
+function checkNicknameAPI(data) {
   console.log(data);
   return axios.post(`/api/v1/member/nickname/check`, { nickname: data });
 }
 
-function* CheckNickname(action) {
+function* checkNickname(action) {
   try {
     console.log("action.data", action.data);
-    const result = yield call(CheckNicknameAPI, action.data);
+    const result = yield call(checkNicknameAPI, action.data);
     yield put({
       type: CHECK_NICKNAME_SUCCESS,
       data: result.data,
@@ -84,15 +84,15 @@ function* CheckNickname(action) {
 }
 
 function* watchCheckNickname() {
-  yield takeLatest(CHECK_NICKNAME_REQUEST, CheckNickname);
+  yield takeLatest(CHECK_NICKNAME_REQUEST, checkNickname);
 }
 
 function* watchSignup() {
-  yield takeLatest(SIGN_UP_REQUEST, SignUp);
+  yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
 function* watchProvider() {
-  yield takeLatest(REQUEST_PROVIDER_REQUEST, Provider);
+  yield takeLatest(REQUEST_PROVIDER_REQUEST, provider);
 }
 
 export default function* userSaga() {

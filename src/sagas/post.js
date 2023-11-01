@@ -62,12 +62,12 @@ function* loadAnswer(action) {
   }
 }
 
-function WriteQuestionAPI(data) {
+function writeQuestionAPI(data) {
   console.log(data);
   return axios.post(`http://172.20.10.3:8080/api/v1/question`, data);
 }
 
-function* WriteQuestion(action) {
+function* writeQuestion(action) {
   try {
     console.log("action.data", action.data);
     // const result = yield call(WriteQuestionAPI, action.data);
@@ -83,15 +83,15 @@ function* WriteQuestion(action) {
     });
   }
 }
-function WriteAnswerAPI(data) {
+function writeAnswerAPI(data) {
   console.log(data);
   return axios.post(`http://172.20.10.3:8080/api/v1/question`, data);
 }
 
-function* WriteAnswer(action) {
+function* writeAnswer(action) {
   try {
     console.log("action.data", action.data);
-    // const result = yield call(WriteAnswerAPI, action.data);
+    // const result = yield call(writeAnswerAPI, action.data);
     yield put({
       type: WRITE_ANSWER_SUCCESS,
       // data: result.data,
@@ -105,7 +105,7 @@ function* WriteAnswer(action) {
   }
 }
 
-function KeywordSearchAPI(data) {
+function keywordSearchAPI(data) {
   console.log(data);
   return axios.post(
     `http://172.20.10.3:8080/api/v1/member/nickname/check`,
@@ -113,10 +113,10 @@ function KeywordSearchAPI(data) {
   );
 }
 
-function* KeywordSearch(action) {
+function* keywordSearch(action) {
   try {
     console.log("action.data", action.data);
-    // const result = yield call(KeywordSearchAPI, action.data);
+    // const result = yield call(keywordSearchAPI, action.data);
     yield put({
       type: KEY_WORD_SEARCH_SUCCESS,
       // data: result.data,
@@ -131,11 +131,11 @@ function* KeywordSearch(action) {
 }
 
 function* watchWriteAnswer() {
-  yield takeLatest(WRITE_ANSWER_REQUEST, WriteAnswer);
+  yield takeLatest(WRITE_ANSWER_REQUEST, writeAnswer);
 }
 
 function* watchWriteQuestion() {
-  yield takeLatest(WRITE_QUESTION_REQUEST, WriteQuestion);
+  yield takeLatest(WRITE_QUESTION_REQUEST, writeQuestion);
 }
 
 function* watchLoadAnswer() {
@@ -147,7 +147,7 @@ function* watchLoadQuestion() {
 }
 
 function* watchCheckKeywordSearch() {
-  yield takeLatest(KEY_WORD_SEARCH_REQUEST, KeywordSearch);
+  yield takeLatest(KEY_WORD_SEARCH_REQUEST, keywordSearch);
 }
 
 export default function* postSaga() {

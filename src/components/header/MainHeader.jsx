@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Header } from "antd/es/layout/layout";
-import styled from "styled-components";
-import { Avatar, Button, Col, Drawer, Row } from "antd";
-import { BookOutlined, EditOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Col, Row } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import UserDrawer from "../custom/UserDrawer";
 
-const MainHeader = () => {
+const MainHeader = ({ me }) => {
   const navigate = useNavigate();
-  const { me } = useSelector((state) => state.user);
+
   // const [open, setOpen] = useState(false);
   // const showDrawer = () => {
   //   setOpen(true);
@@ -21,7 +20,6 @@ const MainHeader = () => {
   return (
     <Header
       style={{
-        // display: "flex",
         backgroundColor: "white",
       }}
     >
@@ -30,16 +28,11 @@ const MainHeader = () => {
           <Link to="/">
             <Avatar
               src="/image/malohajalogo.png"
-              // onClick={() => navigate("/")}
               size={64}
               shape="square"
               style={{ cursor: "pointer" }}
             />
           </Link>
-          {/* <LogoImg
-              src="/image/malohajalogo.png"
-              onClick={() => navigate("/")}
-            /> */}
         </Col>
         <Col xs={2}>
           {!me ? (
@@ -55,11 +48,5 @@ const MainHeader = () => {
     </Header>
   );
 };
-
-const LogoImg = styled.img`
-  width: 50%;
-  object-fit: cover;
-  cursor: pointer;
-`;
 
 export default MainHeader;
