@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 // import { Content } from "antd/es/layout/layout";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,19 +7,19 @@ import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { skillInfo } from "../../constants/skillinfo";
 
-const DetailSearchBar = ({ me }) => {
+const DetailSearchBar = () => {
   const dispatch = useDispatch();
+  const { me } = useSelector((state) => state.user);
+  const { keywordSearchLoading } = useSelector((state) => state.post);
   const { form } = Form.useForm();
-
   const nav = useNavigate();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-    dispatch({
-      type: KEY_WORD_SEARCH_REQUEST,
-      data: values,
-    });
+    // dispatch({
+    //   type: KEY_WORD_SEARCH_REQUEST,
+    //   data: values,
+    // });
   };
-  useEffect(() => {});
   return (
     <Form
       form={form}
@@ -37,16 +37,18 @@ const DetailSearchBar = ({ me }) => {
           </Form.Item>
         </Col>
         <Col xs={6}>
-          <Form.Item
+          {/* 여기 지금 문제 */}
+          {/* <Form.Item
             name={"skill"}
             rules={[
               {
                 type: "array",
               },
             ]}
+            passive={"true"}
           >
             <Select mode="multiple" options={skillInfo} placeholder="언어" />
-          </Form.Item>
+          </Form.Item> */}
         </Col>
         <Col xs={4}>
           <Form.Item
@@ -66,7 +68,9 @@ const DetailSearchBar = ({ me }) => {
           </Form.Item>
         </Col>
         <Col xs={2}>
-          <Button htmlType="submit">검색</Button>
+          <Button htmlType="submit" loading={keywordSearchLoading}>
+            검색
+          </Button>
         </Col>
         <Col xs={6}>
           {!me ? (

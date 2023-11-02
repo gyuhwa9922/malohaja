@@ -8,17 +8,17 @@ import { LOAD_QUESTION_REQUEST } from "../reducers/post";
 
 const Main = () => {
   // const dispatch = useDispatch();
-  const { me } = useSelector((state) => state.user);
 
-  // useEffect(() => {
-  //   // dispatch({
-  //   //   type: LOAD_QUESTION_REQUEST,
-  //   // });
-  // });
+  useEffect(() => {
+    // dispatch({
+    //   type: LOAD_QUESTION_REQUEST,
+    // });
+  });
   return (
     <Layout>
-      <MainHeader me={me} />
-      <DetailSearchBar me={me} />
+      <MainHeader />
+      {/* 지금 디테일바 mount 문제 */}
+      <DetailSearchBar />
       <Question />
 
       {/* {questions.map((i) => (

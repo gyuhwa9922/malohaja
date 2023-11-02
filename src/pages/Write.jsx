@@ -8,23 +8,25 @@ import { skillInfo } from "../constants/skillinfo";
 
 import Swal from "sweetalert2";
 import { WRITE_POST_REQUEST } from "../reducers/post";
+import WriteHeader from "../components/header/WriteHeader";
 
 const Write = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
-  const [ImageList, setImageList] = useState([]);
+  const [imageList, setImageList] = useState([]);
   const [previewImg, setPreviewImg] = useState([]);
   const imageInput = useRef();
   const ImageUpload = (e) => {
     imageInput.current.click();
   };
+
   const handleImg = (e) => {
     console.log(e.target.files[0]);
     let reader = new FileReader();
 
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
-      setImageList([...ImageList, e.target.files[0]]);
+      setImageList([...imageList, e.target.files[0]]);
     }
 
     reader.onloadend = () => {
@@ -35,21 +37,21 @@ const Write = () => {
     };
   };
   const filterImage = (i) => {
-    const imgArr = ImageList.filter((v, index) => index !== i);
+    const imgArr = imageList.filter((v, index) => index !== i);
     const imgNameArr = previewImg.filter((v, index) => index !== i);
     setImageList([...imgArr]);
     setPreviewImg([...imgNameArr]);
   };
-  console.log(ImageList, previewImg);
+  console.log(imageList, previewImg);
 
-  useEffect(() => {
-    // if (!me) {
-    //   nav("/");
-    // }
-  });
+  // useEffect(() => {
+  //   // if (!me) {
+  //   //   nav("/");
+  //   // }
+  // },[]);
   const onFinish = (values) => {
     const form = new FormData();
-    ImageList.forEach((p) => {
+    imageList.forEach((p) => {
       form.append("image", p); //image의 path 즉 경로를 append함.
     });
     form.append("value", values);
@@ -67,7 +69,7 @@ const Write = () => {
 
   return (
     <>
-      <MainHeader />
+      <WriteHeader />
       <Form
         name="WriteContent"
         encType="multipart/form-data"
@@ -79,7 +81,7 @@ const Write = () => {
         <Row gutter={24} justify={"center"}>
           <Col span={4} xs={2} md={6}></Col>
           <Col span={24} xs={20} md={12}>
-            <Form.Item
+            {/* <Form.Item
               name={"skill"}
               rules={[
                 {
@@ -88,7 +90,7 @@ const Write = () => {
               ]}
             >
               <Select mode="multiple" options={skillInfo} placeholder="언어" />
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item name={"content"} label="질문작성">
               <Input.TextArea />
             </Form.Item>
@@ -108,7 +110,7 @@ const Write = () => {
             </Col>
             <br />
 
-            {ImageList.map((v, i) => (
+            {imageList.map((v, i) => (
               <Col span={12}>
                 <Image preview={false} key={i} src={previewImg[i]} alt={v} />
                 <Button onClick={() => filterImage(i)}>이미지 삭제</Button>
