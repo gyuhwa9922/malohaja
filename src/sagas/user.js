@@ -10,7 +10,7 @@ import {
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
-} from "../reducers/user";
+} from "../reducers/userAction";
 
 //로그인
 function signUpAPI(data) {

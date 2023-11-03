@@ -20,7 +20,6 @@ const configureStore = () => {
       ? compose(applyMiddleware(...middlewares)) //배포 코드
       : composeWithDevTools(applyMiddleware(...middlewares)); //개발 시 사용되는 코드
   const store = createStore(reducer, enhancer);
-  console.log("saga run");
   store.sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 };

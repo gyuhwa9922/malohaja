@@ -7,7 +7,6 @@ import { UploadOutlined } from "@ant-design/icons";
 import { skillInfo } from "../constants/skillinfo";
 
 import Swal from "sweetalert2";
-import { WRITE_POST_REQUEST } from "../reducers/post";
 import WriteHeader from "../components/header/WriteHeader";
 
 const Write = () => {

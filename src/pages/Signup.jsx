@@ -2,9 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { Button, Col, Form, Input, Row, Select, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { CHECK_NICKNAME_REQUEST, SIGN_UP_REQUEST } from "../reducers/user";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import {
+  CHECK_NICKNAME_REQUEST,
+  SIGN_UP_REQUEST,
+} from "../reducers/userAction";
 // const contentStyle = {
 //   textAlign: "center",
 //   minHeight: 120,
