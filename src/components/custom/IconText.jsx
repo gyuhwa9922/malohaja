@@ -5,6 +5,7 @@ import {
   LikeOutlined,
   MessageOutlined,
   MoreOutlined,
+  AudioOutlined,
 } from "@ant-design/icons";
 
 const IconText = ({ icon, text, handle }) => {

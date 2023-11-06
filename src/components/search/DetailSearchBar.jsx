@@ -1,25 +1,36 @@
-import React, { useCallback, useEffect } from "react";
-// import { Content } from "antd/es/layout/layout";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { KEY_WORD_SEARCH_REQUEST } from "../../reducers/post";
 import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { skillInfo } from "../../constants/skillinfo";
+import MultipleSelect from "./MultipleSelect";
 
 const DetailSearchBar = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+  const [skill, setskill] = useState([]);
   const { keywordSearchLoading } = useSelector((state) => state.post);
   const { form } = Form.useForm();
   const nav = useNavigate();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-    // dispatch({
-    //   type: KEY_WORD_SEARCH_REQUEST,
-    //   data: values,
-    // });
-  };
+  const onFinish = useCallback(
+    (values) => {
+      values["skill"] = skill;
+      console.log("Received values of form: ", values);
+      // dispatch({
+      //   type: KEY_WORD_SEARCH_REQUEST,
+      //   data: values,
+      // });
+    },
+    [skill]
+  );
+  // console.log(form.skill);
+  const handleChange = useCallback((value) => {
+    setskill(value);
+    console.log(`selected ${value}`);
+  }, []);
+
   return (
     <Form
       form={form}
@@ -45,9 +56,13 @@ const DetailSearchBar = () => {
                 type: "array",
               },
             ]}
-            passive={"true"}
           >
-            <Select mode="multiple" options={skillInfo} placeholder="언어" />
+            <Select
+              mode="multiple"
+              onChange={handleChange}
+              options={skillInfo}
+              placeholder="언어"
+            />
           </Form.Item> */}
         </Col>
         <Col xs={4}>

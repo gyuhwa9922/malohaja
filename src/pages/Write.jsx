@@ -3,11 +3,12 @@ import { Button, Card, Col, Form, Image, Input, List, Row, Select } from "antd";
 import MainHeader from "../components/header/MainHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { UploadOutlined } from "@ant-design/icons";
+import { AudioOutlined, UploadOutlined } from "@ant-design/icons";
 import { skillInfo } from "../constants/skillinfo";
 
 import Swal from "sweetalert2";
 import WriteHeader from "../components/header/WriteHeader";
+import Recording from "../components/post/record/Recording";
 
 const Write = () => {
   const nav = useNavigate();
@@ -90,6 +91,7 @@ const Write = () => {
             >
               <Select mode="multiple" options={skillInfo} placeholder="언어" />
             </Form.Item> */}
+            <Recording />
             <Form.Item name={"content"} label="질문작성">
               <Input.TextArea />
             </Form.Item>

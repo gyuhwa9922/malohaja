@@ -1,4 +1,5 @@
 // import React, { useEffect } from "react";
+import { Card } from "antd";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,7 +14,7 @@ const DetailQuestion = () => {
     //    id : id,
     // })
   });
-  return <div>hi {id}</div>;
+  return <Card>hi {id}</Card>;
 };
 
 export default DetailQuestion;

@@ -9,11 +9,11 @@ import { LOAD_QUESTION_REQUEST } from "../reducers/postAction";
 const Main = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // dispatch({
-    //   type: LOAD_QUESTION_REQUEST,
-    // });
-  });
+  // useEffect(() => {
+  //   // dispatch({
+  //   //   type: LOAD_QUESTION_REQUEST,
+  //   // });
+  // });
   return (
     <Layout>
       <MainHeader />
