@@ -1,36 +1,41 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { KEY_WORD_SEARCH_REQUEST } from "../../reducers/post";
+
 import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { skillInfo } from "../../constants/skillinfo";
 import MultipleSelect from "./MultipleSelect";
+import { KEY_WORD_SEARCH_REQUEST } from "../../reducers/postAction";
 
 const DetailSearchBar = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const nav = useNavigate();
   const { me } = useSelector((state) => state.user);
   const [skill, setskill] = useState([]);
   const { keywordSearchLoading } = useSelector((state) => state.post);
   const { form } = Form.useForm();
-  const nav = useNavigate();
   const onFinish = useCallback(
     (values) => {
       values["skill"] = skill;
       console.log("Received values of form: ", values);
-      // dispatch({
-      //   type: KEY_WORD_SEARCH_REQUEST,
-      //   data: values,
-      // });
+      return dispatch({
+        type: KEY_WORD_SEARCH_REQUEST,
+        data: values,
+      });
     },
     [skill]
   );
   // console.log(form.skill);
-  const handleChange = useCallback((value) => {
+  const handleChange = (value) => {
     setskill(value);
     console.log(`selected ${value}`);
-  }, []);
-
+  };
+  // useEffect(() => {
+  //   return () => {
+  //     handleChange(null);
+  //   };
+  // }, []);
   return (
     <Form
       form={form}
@@ -49,7 +54,7 @@ const DetailSearchBar = () => {
         </Col>
         <Col xs={6}>
           {/* 여기 지금 문제 */}
-          {/* <Form.Item
+          <Form.Item
             name={"skill"}
             rules={[
               {
@@ -62,8 +67,9 @@ const DetailSearchBar = () => {
               onChange={handleChange}
               options={skillInfo}
               placeholder="언어"
+              disabled
             />
-          </Form.Item> */}
+          </Form.Item>
         </Col>
         <Col xs={4}>
           <Form.Item

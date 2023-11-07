@@ -30,28 +30,28 @@ import {
 } from "./postAction";
 
 export const initialState = {
-  skill: [
-    {
-      label: "java",
-      value: "Java",
-    },
-    {
-      label: "spring",
-      value: "Spring",
-    },
-    {
-      label: "mysql",
-      value: "Mysql",
-    },
-    {
-      label: "git",
-      value: "Git",
-    },
-    {
-      label: "etc",
-      value: "Etc",
-    },
-  ],
+  // skill: [
+  //   {
+  //     label: "java",
+  //     value: "Java",
+  //   },
+  //   {
+  //     label: "spring",
+  //     value: "Spring",
+  //   },
+  //   {
+  //     label: "mysql",
+  //     value: "Mysql",
+  //   },
+  //   {
+  //     label: "git",
+  //     value: "Git",
+  //   },
+  //   {
+  //     label: "etc",
+  //     value: "Etc",
+  //   },
+  // ],
   keywordSearchLoading: false,
   keywordSearchDone: false,
   keywordSearchError: null,
