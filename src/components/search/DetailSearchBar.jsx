@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-
 import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { skillInfo } from "../../constants/skillinfo";
@@ -67,7 +66,6 @@ const DetailSearchBar = () => {
               onChange={handleChange}
               options={skillInfo}
               placeholder="언어"
-              disabled
             />
           </Form.Item>
         </Col>
