@@ -16,7 +16,7 @@ const Question = () => {
   const dispatch = useDispatch();
   const { questions, answers } = useSelector((state) => state.post);
   // console.log(data);
-  console.log(questions[0].bestAnswer, answers);
+  // console.log(questions[0].bestAnswer, answers);
   const updateQuestion = () => {
     dispatch({});
   };
@@ -35,7 +35,7 @@ const Question = () => {
   const QuestionBookmark = () => {
     dispatch({});
   };
-  useEffect(() => {}, [answers, questions]);
+  // useEffect(() => {}, [answers, questions]);
   return (
     <Row justify={"center"}>
       <List

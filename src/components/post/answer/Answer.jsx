@@ -13,7 +13,7 @@ const Answer = ({ answer }) => {
   const likeOffQuestion = () => {
     dispatch({});
   };
-  console.log("answer", answer);
+  // console.log("answer", answer);
   return (
     <Card
       // hoverable

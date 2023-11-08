@@ -5,10 +5,6 @@ const MultipleSelect = () => {
   const handleChange = useCallback((value) => {
     console.log(`selected ${value}`);
   }, []);
-
-  // const handleChange = (value) => {
-
-  // };
   return (
     <Select
       mode="multiple"
@@ -17,7 +13,7 @@ const MultipleSelect = () => {
       }}
       placeholder="언어"
       onChange={handleChange}
-      optionLabelProp="label"
+      // optionLabelProp="label"
       options={skillInfo}
     />
   );

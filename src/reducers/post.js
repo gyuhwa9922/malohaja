@@ -79,10 +79,11 @@ export const initialState = {
   detailQuestionLoading: false,
   detailQuestionDone: false,
   detailQuestionError: null,
-  detailQuestion: [],
+  detailAnswer: [],
+  detailQuestion: null,
   questions: [
     {
-      id: `1`,
+      id: 1,
       title: `질문 test1`,
       avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=0`,
       description: "아~~~ 엄청난 고수가 되고 싶다. 고수되는 법 알려주셈 ㅋㅋ",
@@ -90,7 +91,7 @@ export const initialState = {
       likeCount: 20,
       commentCount: 2,
       bestAnswer: {
-        id: `1`,
+        id: 1,
         title: "질문에 대한 답변~",
         content: "솰라 솰라~ 음~ 굿굿 1",
         likeCount: 10,
@@ -100,7 +101,7 @@ export const initialState = {
         "알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     },
     {
-      id: `2`,
+      id: 2,
       title: `질문 test2`,
       avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=0`,
       description: "아~~~ 엄청난 고수가 되고 싶다. 고수되는 법 알려주셈 ㅋㅋ",
@@ -108,7 +109,7 @@ export const initialState = {
       likeCount: 20,
       commentCount: 2,
       bestAnswer: {
-        id: `2`,
+        id: 2,
         title: "질문에 대한 답변~",
         content: "솰라 솰라~ 음~ 굿굿 2",
         likeCount: 10,
@@ -118,15 +119,17 @@ export const initialState = {
         "알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     },
     {
-      id: `3`,
+      id: 3,
       title: `질문 test3`,
       avatar: `https://xsgames.co/randomusers/avatar.php?g=pixel&key=0`,
       description: "아~~~ 엄청난 고수가 되고 싶다. 고수되는 법 알려주셈 ㅋㅋ",
       content: "있겠니? ㅋㅋㅋㅋ 시간 투자해 ㅋㅋㅋ",
       likeCount: 20,
       commentCount: 2,
+      question:
+        "알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       bestAnswer: {
-        id: `3`,
+        id: 3,
         title: "질문에 대한 답변~",
         content: "솰라 솰라~ 음~ 굿굿3 ",
         likeCount: 10,
@@ -135,34 +138,37 @@ export const initialState = {
       QuestionComment: [
         {
           id: 1,
+          questionId: 3,
           userId: 1,
           comment: "test1",
         },
         {
           id: 2,
+          questionId: 3,
           userId: 1,
           comment: "test2",
         },
         {
           id: 3,
+          questionId: 3,
           userId: 1,
           comment: "test3",
         },
       ],
-      question:
-        "알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     },
   ],
   answers: [
     {
-      id: `2`,
+      id: 2,
+      questionId: 1,
       title: "질문에 대한 답변~",
       content: "솰라 솰라~ 음~ 굿굿 ",
       likeCount: 10,
       commentCount: 2,
     },
     {
-      id: `3`,
+      id: 3,
+      questionId: 1,
       title: "질문에 대한 답변~",
       content: "솰라 솰라~ 음~ 굿굿 ",
       likeCount: 10,
@@ -286,6 +292,12 @@ const reducer = (state = initialState, action) => {
         draft.detailQuestionError = null;
         break;
       case DETAIL_QUESTION_SUCCESS:
+        draft.detailQuestion = draft.questions.find(
+          (v) => v.id === action.data
+        );
+        draft.detailAnswer = draft.answers.filter(
+          (v) => v.questionId === action.data
+        );
         draft.detailQuestionLoading = false;
         draft.detailQuestionDone = true;
         break;
