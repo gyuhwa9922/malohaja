@@ -8,7 +8,7 @@ import { LOAD_QUESTION_REQUEST } from "../reducers/postAction";
 
 const Main = () => {
   const dispatch = useDispatch();
-
+  const { me } = useSelector((state) => state.user);
   // useEffect(() => {
   //   // dispatch({
   //   //   type: LOAD_QUESTION_REQUEST,
@@ -16,10 +16,10 @@ const Main = () => {
   // });
   return (
     <Layout>
-      <MainHeader />
+      <MainHeader me={me} />
       {/* 지금 디테일바 mount 문제 */}
-      <DetailSearchBar />
-      <Question />
+      <DetailSearchBar me={me} />
+      <Question me={me} />
     </Layout>
   );
 };

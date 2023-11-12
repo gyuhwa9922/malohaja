@@ -5,11 +5,10 @@ import { UserOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 
 import UserDrawer from "../custom/UserDrawer";
-import { useSelector } from "react-redux";
 
-const MainHeader = () => {
+const MainHeader = ({ me }) => {
   const navigate = useNavigate();
-  const { me } = useSelector((state) => state.user);
+
   // const [open, setOpen] = useState(false);
   // const showDrawer = () => {
   //   setOpen(true);
@@ -17,7 +16,6 @@ const MainHeader = () => {
   // const onClose = () => {
   //   setOpen(false);
   // };
-  console.log("me", me);
   return (
     <Header
       style={{

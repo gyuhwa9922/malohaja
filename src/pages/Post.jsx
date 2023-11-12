@@ -12,19 +12,24 @@ const Post = () => {
   const { detailQuestion, detailAnswer, detailQuestionLoading } = useSelector(
     (state) => state.post
   );
+  const { me } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch({
       type: DETAIL_QUESTION_REQUEST,
       data: parseInt(id),
     });
-  }, [detailQuestion]);
+  }, []);
 
   return (
     <>
       <MainHeader />
-      <QuestionDetail detailQuestion={detailQuestion} />
-      <AnswerDetail detailAnswer={detailAnswer} />
+      <QuestionDetail
+        detailQuestion={detailQuestion}
+        me={me}
+        detailAnswer={detailAnswer}
+      />
+      {/* <AnswerDetail detailAnswer={detailAnswer} me={me} /> */}
     </>
   );
 };

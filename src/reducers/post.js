@@ -99,6 +99,26 @@ export const initialState = {
       },
       question:
         "알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+      questionComment: [
+        {
+          id: 1,
+          questionId: 1,
+          userId: 1,
+          comment: "test1",
+        },
+        {
+          id: 2,
+          questionId: 1,
+          userId: 1,
+          comment: "test2",
+        },
+        {
+          id: 3,
+          questionId: 1,
+          userId: 1,
+          comment: "test3",
+        },
+      ],
     },
     {
       id: 2,
@@ -117,6 +137,26 @@ export const initialState = {
       },
       question:
         "알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~알려주세요~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+      questionComment: [
+        {
+          id: 4,
+          questionId: 2,
+          userId: 1,
+          comment: "test4",
+        },
+        {
+          id: 5,
+          questionId: 2,
+          userId: 1,
+          comment: "test5",
+        },
+        {
+          id: 6,
+          questionId: 2,
+          userId: 1,
+          comment: "test6",
+        },
+      ],
     },
     {
       id: 3,
@@ -135,24 +175,24 @@ export const initialState = {
         likeCount: 10,
         commentCount: 2,
       },
-      QuestionComment: [
+      questionComment: [
         {
-          id: 1,
+          id: 7,
           questionId: 3,
           userId: 1,
-          comment: "test1",
+          comment: "test7",
         },
         {
-          id: 2,
+          id: 8,
           questionId: 3,
           userId: 1,
-          comment: "test2",
+          comment: "test8",
         },
         {
-          id: 3,
+          id: 9,
           questionId: 3,
           userId: 1,
-          comment: "test3",
+          comment: "test9",
         },
       ],
     },
@@ -165,6 +205,26 @@ export const initialState = {
       content: "솰라 솰라~ 음~ 굿굿 ",
       likeCount: 10,
       commentCount: 2,
+      answerComment: [
+        {
+          id: 1,
+          userId: 1,
+          answerId: 2,
+          comment: "tes1",
+        },
+        {
+          id: 2,
+          userId: 1,
+          answerId: 2,
+          comment: "tes2",
+        },
+        {
+          id: 3,
+          userId: 1,
+          answerId: 2,
+          comment: "tes3",
+        },
+      ],
     },
     {
       id: 3,
@@ -173,6 +233,26 @@ export const initialState = {
       content: "솰라 솰라~ 음~ 굿굿 ",
       likeCount: 10,
       commentCount: 2,
+      answerComment: [
+        {
+          id: 4,
+          userId: 1,
+          answerId: 3,
+          comment: "tes4",
+        },
+        {
+          id: 5,
+          userId: 1,
+          answerId: 3,
+          comment: "tes5",
+        },
+        {
+          id: 6,
+          userId: 1,
+          answerId: 3,
+          comment: "tes6",
+        },
+      ],
     },
   ],
 };

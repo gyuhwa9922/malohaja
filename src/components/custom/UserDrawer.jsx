@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BookOutlined, EditOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
+import IconText from "./IconText";
 const UserDrawer = () => {
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
@@ -15,22 +16,14 @@ const UserDrawer = () => {
         <UserOutlined />
       </Button>
       <Drawer placement="right" onClose={onClose} size="default" open={open}>
-        <p>
-          <UserOutlined />
-          내정보
-        </p>
-        <p>
-          <EditOutlined />
-          글작성
-        </p>
-        <p>
-          <BookOutlined />
-          나의 북마크
-        </p>
-        <p>
-          <BookOutlined />
-          로그아웃
-        </p>
+        <IconText icon={UserOutlined} text={"내정보"} />
+        <br />
+        <IconText icon={EditOutlined} text={"글작성"} />
+        <br />
+        <IconText icon={BookOutlined} text={"나의 북마크"} />
+        <br />
+        <IconText icon={BookOutlined} text={"로그아웃"} />
+        <br />
       </Drawer>
     </>
   );

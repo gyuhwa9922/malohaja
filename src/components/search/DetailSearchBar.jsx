@@ -2,35 +2,33 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { EditOutlined } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { skillInfo } from "../../constants/skillinfo";
 import { KEY_WORD_SEARCH_REQUEST } from "../../reducers/postAction";
 
-const DetailSearchBar = () => {
+const DetailSearchBar = ({ me }) => {
   const dispatch = useDispatch();
-  const nav = useNavigate();
-  const { me } = useSelector((state) => state.user);
   const [skill, setskill] = useState([]);
-  const { keywordSearchLoading } = useSelector((state) => state.post);
-  const { form } = Form.useForm();
-  const onFinish = useCallback(
-    (values) => {
-      values["skill"] = skill;
-      console.log("Received values of form: ", values);
-      return dispatch({
-        type: KEY_WORD_SEARCH_REQUEST,
-        data: values,
-      });
-    },
-    [skill]
-  );
-
-  // console.log(form.skill);
+  const nav = useNavigate();
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    values["skill"] = skill;
+    console.log("Received values of form: ", values);
+    return dispatch({
+      type: KEY_WORD_SEARCH_REQUEST,
+      data: values,
+    });
+  };
   const handleChange = (value) => {
     console.log(`selected ${value}`);
-    setskill(value);
+    return setskill(value);
   };
-  useEffect(() => {}, [skill]);
+  useEffect(() => {
+    return () => {
+      console.log(form);
+      // form.resetFields(null);
+    };
+  }, []);
   return (
     <Form
       form={form}
@@ -53,6 +51,7 @@ const DetailSearchBar = () => {
             name={"skill"}
             rules={[
               {
+                required: true,
                 type: "array",
               },
             ]}
@@ -83,9 +82,7 @@ const DetailSearchBar = () => {
           </Form.Item>
         </Col>
         <Col xs={2}>
-          <Button htmlType="submit" loading={keywordSearchLoading}>
-            검색
-          </Button>
+          <Button htmlType="submit">검색</Button>
         </Col>
         <Col xs={6}>
           {!me ? (

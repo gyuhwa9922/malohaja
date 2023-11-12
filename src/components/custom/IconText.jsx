@@ -6,6 +6,8 @@ import {
   MessageOutlined,
   MoreOutlined,
   AudioOutlined,
+  EditOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 
 const IconText = ({ icon, text, handle }) => {
@@ -16,7 +18,7 @@ const IconText = ({ icon, text, handle }) => {
       {text}
     </Space>
   ) : (
-    <Space>
+    <Space style={{ margin: "10px" }}>
       {React.createElement(icon)}
       {text}
     </Space>

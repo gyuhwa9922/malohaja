@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Button, Card, Col, Form, Image, Input, List, Row, Select } from "antd";
 import MainHeader from "../components/header/MainHeader";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import Recording from "../components/post/record/Recording";
 const Write = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
+  const [recordUrl, setrecordUrl] = useState();
   const [imageList, setImageList] = useState([]);
   const [previewImg, setPreviewImg] = useState([]);
   const imageInput = useRef();
@@ -42,20 +43,21 @@ const Write = () => {
     setImageList([...imgArr]);
     setPreviewImg([...imgNameArr]);
   };
-  console.log(imageList, previewImg);
+  // console.log(imageList, previewImg, recordUrl);
 
   // useEffect(() => {
   //   // if (!me) {
   //   //   nav("/");
   //   // }
   // },[]);
-  const onFinish = (values) => {
-    const form = new FormData();
-    imageList.forEach((p) => {
-      form.append("image", p); //image의 path 즉 경로를 append함.
-    });
-    form.append("value", values);
-    // form.append("value" , values  );
+  const onFinish = useCallback((values) => {
+    values["record"] = recordUrl;
+    // const form = new FormData();
+    // imageList.forEach((p) => {
+    //   form.append("image", p); //image의 path 즉 경로를 append함.
+    // });
+    // form.append("value", values);
+
     // if (me) {
     //   // dispatch({
     //   //   type : WRITE_POST_REQUEST
@@ -64,8 +66,8 @@ const Write = () => {
     // } else {
     //   // nav("/");
     // }
-    console.log("Received values of form: ", form);
-  };
+    console.log("Received values of form: ", values);
+  }, []);
 
   return (
     <>
@@ -91,7 +93,7 @@ const Write = () => {
             >
               <Select mode="multiple" options={skillInfo} placeholder="언어" />
             </Form.Item> */}
-            <Recording />
+            <Recording recordUrl={recordUrl} setrecordUrl={setrecordUrl} />
             <Form.Item name={"content"} label="질문작성">
               <Input.TextArea />
             </Form.Item>
@@ -111,12 +113,21 @@ const Write = () => {
             </Col>
             <br />
 
-            {imageList.map((v, i) => (
-              <Col span={12}>
-                <Image preview={false} key={i} src={previewImg[i]} alt={v} />
-                <Button onClick={() => filterImage(i)}>이미지 삭제</Button>
-              </Col>
-            ))}
+            <Card title="사진">
+              {imageList.map((v, i) => (
+                <Card.Grid key={i}>
+                  <Image
+                    preview={false}
+                    key={v.lastModified}
+                    src={previewImg[i]}
+                    alt={v}
+                  />
+                  <Button key={i} onClick={() => filterImage(i)}>
+                    {`${i}`}이미지 삭제
+                  </Button>
+                </Card.Grid>
+              ))}
+            </Card>
 
             <Button htmlType="submit">작성하기</Button>
           </Col>

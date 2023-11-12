@@ -28,7 +28,7 @@ export const initialState = {
   isVailedNickName: true,
   redirectUrl: "",
   me: null,
-  userInfo: null,
+  myInfo: null,
 };
 
 // export const
