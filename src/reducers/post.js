@@ -1,5 +1,11 @@
 import { produce } from "immer";
 import {
+  BOOKMARK_FAILURE,
+  BOOKMARK_REQUEST,
+  BOOKMARK_SUCCESS,
+  DELETE_BOOKMARK_FAILURE,
+  DELETE_BOOKMARK_REQUEST,
+  DELETE_BOOKMARK_SUCCESS,
   DETAIL_QUESTION_FAILURE,
   DETAIL_QUESTION_REQUEST,
   DETAIL_QUESTION_SUCCESS,
@@ -70,6 +76,12 @@ export const initialState = {
   unlikeQuestionLoading: false,
   unlikeQuestionDone: false,
   unlikeQuestionError: null,
+  bookmarkLoading: false,
+  bookmarkDone: false,
+  bookmarkError: null,
+  deleteBookmarkLoading: false,
+  deleteBookmarkDone: false,
+  deleteBookmarkError: null,
   likeAnswerLoading: false,
   likeAnswerDone: false,
   likeAnswerError: null,
@@ -384,6 +396,32 @@ const reducer = (state = initialState, action) => {
       case DETAIL_QUESTION_FAILURE:
         draft.detailQuestionLoading = false;
         draft.detailQuestionError = action.error;
+        break;
+      case BOOKMARK_REQUEST:
+        draft.bookmarkLoading = true;
+        draft.bookmarkDone = false;
+        draft.bookmarkError = null;
+        break;
+      case BOOKMARK_SUCCESS:
+        draft.bookmarkLoading = false;
+        draft.bookmarkDone = true;
+        break;
+      case BOOKMARK_FAILURE:
+        draft.bookmarkLoading = false;
+        draft.bookmarkError = action.error;
+        break;
+      case DELETE_BOOKMARK_REQUEST:
+        draft.deleteBookmarkLoading = true;
+        draft.deleteBookmarkDone = false;
+        draft.deleteBookmarkError = null;
+        break;
+      case DELETE_BOOKMARK_SUCCESS:
+        draft.deleteBookmarkLoading = false;
+        draft.deleteBookmarkDone = true;
+        break;
+      case DELETE_BOOKMARK_FAILURE:
+        draft.deleteBookmarkLoading = false;
+        draft.deleteBookmarkError = action.error;
         break;
       default:
         break;

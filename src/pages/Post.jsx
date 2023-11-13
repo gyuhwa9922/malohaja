@@ -20,7 +20,7 @@ const Post = () => {
       data: parseInt(id),
     });
   }, []);
-
+  console.log(detailQuestion);
   return (
     <>
       <MainHeader />

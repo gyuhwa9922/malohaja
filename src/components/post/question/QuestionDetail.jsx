@@ -14,43 +14,58 @@ import { useDispatch, useSelector } from "react-redux";
 import AnswerDetail from "../answer/AnswerDetail";
 import Comment from "../comment/Comment";
 import Swal from "sweetalert2";
+import {
+  BOOKMARK_REQUEST,
+  DELETE_BOOKMARK_REQUEST,
+} from "../../../reducers/postAction";
+import Loading from "../../custom/Loading";
 
 const QuestionDetail = ({ detailQuestion, detailAnswer, me }) => {
   const dispatch = useDispatch();
   const [commentOpen, setCommentOpen] = useState(false);
   const [bookMark, setBookMark] = useState(false);
-  const [isLike, setIsLike] = useState(false);
+  const [isLiked, setIsLike] = useState(false);
   const commentToggle = useCallback(() => {
     setCommentOpen((prev) => !prev);
   }, []);
   // useEffect({
   // },)
   const bookMarkOn = useCallback(() => {
-    setBookMark(true);
+    console.log("bookmark");
+
     // if (false) {
     //   return Swal.fire({
     //     icon: "error",
     //     text: "로그인을 해주세요!",
     //   });
     // }
-    // dispatch({
-    //   // type: ,
-    //   data: detailQuestion.id,
-    // });
-  }, []);
+    if (!detailQuestion) {
+      console.log("ㅠㅠㅠ");
+      return <Loading />;
+    } else {
+      console.log("성공~");
+      setBookMark(true);
+      dispatch({
+        type: BOOKMARK_REQUEST,
+        data: detailQuestion.id,
+      });
+    }
+  }, [detailQuestion]);
   const bookMarkOff = useCallback(() => {
-    setBookMark(false);
+    console.log("deletebookmark");
+
     // if (false) {
     //   return Swal.fire({
     //     icon: "error",
     //     text: "로그인을 해주세요!",
     //   });
     // }
-    // dispatch({
-    //   // type: ,
-    //   data: detailQuestion.id,
-    // });
-  }, []);
+
+    dispatch({
+      type: DELETE_BOOKMARK_REQUEST,
+      data: detailQuestion.id,
+    });
+  }, [detailQuestion]);
   const likeQuestion = useCallback(() => {
     setIsLike(true);
     // if (false) {
@@ -63,7 +78,7 @@ const QuestionDetail = ({ detailQuestion, detailAnswer, me }) => {
     //   // type: ,
     //   data: detailQuestion.id,
     // });
-  }, []);
+  }, [detailQuestion]);
   const unLikeQuestion = useCallback(() => {
     setIsLike(false);
     // if (false) {
@@ -76,28 +91,18 @@ const QuestionDetail = ({ detailQuestion, detailAnswer, me }) => {
     //   // type: ,
     //   data: detailQuestion.id,
     // });
-  }, []);
-  console.log("detailQuestion", detailQuestion);
+  }, [detailQuestion]);
+
+  // console.log("detailQuestion", detailQuestion);
   if (!detailQuestion) {
-    return (
-      <Spin
-        indicator={
-          <LoadingOutlined
-            style={{
-              fontSize: 24,
-            }}
-            spin
-          />
-        }
-      />
-    );
+    return <Loading />;
   }
   return (
     <>
       <Card
         style={{ textAlign: "center" }}
         actions={[
-          !isLike ? (
+          !isLiked ? (
             <LikeOutlined onClick={likeQuestion} />
           ) : (
             <LikeFilled onClick={unLikeQuestion} />

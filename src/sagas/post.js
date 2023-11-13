@@ -1,6 +1,12 @@
 import axios from "axios";
 import { all, call, fork, put, takeLatest, throttle } from "redux-saga/effects";
 import {
+  BOOKMARK_FAILURE,
+  BOOKMARK_REQUEST,
+  BOOKMARK_SUCCESS,
+  DELETE_BOOKMARK_FAILURE,
+  DELETE_BOOKMARK_REQUEST,
+  DELETE_BOOKMARK_SUCCESS,
   DETAIL_QUESTION_FAILURE,
   DETAIL_QUESTION_REQUEST,
   DETAIL_QUESTION_SUCCESS,
@@ -163,6 +169,50 @@ function* likeQuestion(action) {
   }
 }
 
+function deleteBookmarkAPI(data) {
+  console.log(data);
+  return axios.delete(``);
+}
+
+function* deleteBookmark(action) {
+  try {
+    console.log(action.data);
+    // const result = yield call(deleteBookmarkAPI, action.data);
+    yield put({
+      type: DELETE_BOOKMARK_SUCCESS,
+      data: action.data,
+      // data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: DELETE_BOOKMARK_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+function bookmarkAPI(data) {
+  console.log(data);
+  return axios.put(``);
+}
+
+function* bookmark(action) {
+  try {
+    console.log(action.data);
+    // const result = yield call(bookmarkAPI, action.data);
+    yield put({
+      type: BOOKMARK_SUCCESS,
+      data: action.data,
+      // data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: BOOKMARK_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
 function unLikeQuestionAPI(data) {
   return axios.delete(``);
 }
@@ -245,6 +295,14 @@ function* keywordSearch(action) {
   }
 }
 
+function* watchDeleteBookmark() {
+  yield takeLatest(DELETE_BOOKMARK_REQUEST, deleteBookmark);
+}
+
+function* watchBookmark() {
+  yield takeLatest(BOOKMARK_REQUEST, bookmark);
+}
+
 function* watchLoadDetailQuestion() {
   // 1초
   yield throttle(1000, DETAIL_QUESTION_REQUEST, loadDetailQuestion);
@@ -286,6 +344,8 @@ function* watchCheckKeywordSearch() {
 
 export default function* postSaga() {
   yield all([
+    fork(watchDeleteBookmark),
+    fork(watchBookmark),
     fork(watchLoadDetailQuestion),
     fork(watchLikeAnswer),
     fork(watchLikeQuestion),
